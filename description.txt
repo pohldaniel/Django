@@ -1,0 +1,36 @@
+vagrant version
+vagrant init
+vagrant up
+vagrant ssh
+vagrant halt
+
+sudo apt install wget build-essential libreadline-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev
+wget -c https://www.python.org/ftp/python/3.11.10/Python-3.11.10.tar.xz
+tar -Jxf Python-3.11.10.tar.xz
+cd Python-3.11.10/
+./configure --enable-optimizations
+sudo make -j4 && sudo make altinstall
+
+
+mkvirtualenv profiles_api --python=python3
+deactivate
+workon profiles_api
+
+python3 -m pip install Django==5.1.2
+python3 -m pip install Djangorestframework==3.15.2
+
+python3 -m django startproject profiles_project
+cd profiles_project/
+python3 manage.py startapp profiles_api
+
+
+pip freeze > requirements.txt
+
+python3 manage.py runserver 0.0.0.0:8080
+
+
+python3 manage.py makemigrations profiles_api
+python3 manage.py migrate
+python3 manage.py createsuperuser
+
+http://localhost:8080/admin
