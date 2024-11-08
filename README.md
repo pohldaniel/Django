@@ -1,2 +1,2 @@
 # Django
-Attempion to get familiar with python Django
+Attemption to get familiar with python Django
